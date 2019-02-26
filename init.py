@@ -2,14 +2,14 @@
 # -*- coding:utf-8 -*-
 import os
 import config
-from flask import Flask  # jsonify
+from flask import Flask
 from flask_script import Manager  # 文件拓展
 from flask_bootstrap import Bootstrap  # 文件拓展
 from flask_sqlalchemy import SQLAlchemy
 from flask_uploads import UploadSet, IMAGES, configure_uploads
 from flask_cache import Cache
 
-
+# app定义
 app = Flask(__name__)
 manager = Manager(app)
 bootstrap = Bootstrap(app)

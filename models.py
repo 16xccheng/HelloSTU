@@ -6,27 +6,28 @@ from init import db
 
 
 # #################################################### 表单类大小 ##################################################### #
-passwordSize = 256  # 密码
-contentSize = 256  # 文本
-imageSize = 256  # 图片路径
+class Size:
+    passwordSize = 256  # 密码
+    contentSize = 256  # 文本
+    imageSize = 256  # 图片路径
 
-activeTimeSize = 64  # 活动时间
-attachmentSize = 64  # 附件链接
+    activeTimeSize = 64  # 活动时间
+    attachmentSize = 64  # 附件链接
 
-createTimeSize = 32  # 创建时间
-localSize = 32  # 地址
-emailSize = 32  # 邮件
+    createTimeSize = 32  # 创建时间
+    localSize = 32  # 地址
+    emailSize = 32  # 邮件
 
-coordinateSize = 16  # 坐标
-permissionSize = 16  # 权限
-accountSize = 16  # 账号
-originSize = 16  # 来源
-wechatSize = 16  # 微信
-writerSize = 16  # 作者
-phoneSize = 16  # 电话
-titleSize = 16  # 标题
-typeSize = 16  # 类型
-nameSize = 16  # 名字
+    coordinateSize = 16  # 坐标
+    permissionSize = 16  # 权限
+    accountSize = 16  # 账号
+    originSize = 16  # 来源
+    wechatSize = 16  # 微信
+    writerSize = 16  # 作者
+    phoneSize = 16  # 电话
+    titleSize = 16  # 标题
+    typeSize = 16  # 类型
+    nameSize = 16  # 名字
 
 
 # #################################################### 数据库表单 ##################################################### #
@@ -35,10 +36,10 @@ nameSize = 16  # 名字
 class Scenery(db.Model):
     __tablename__ = 'sceneries'
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(nameSize), unique=True)
-    content = db.Column(db.String(contentSize))
-    image = db.Column(db.String(imageSize))
-    origin = db.Column(db.String(originSize))
+    name = db.Column(db.String(Size.nameSize), unique=True)
+    content = db.Column(db.String(Size.contentSize))
+    image = db.Column(db.String(Size.imageSize))
+    origin = db.Column(db.String(Size.originSize))
 
     # 打印
     def __repr__(self):
@@ -51,7 +52,7 @@ class Scenery(db.Model):
 class PlaceC(db.Model):
     __tablename__ = 'placeCs'
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(nameSize), unique=True)
+    name = db.Column(db.String(Size.nameSize), unique=True)
     place = db.relationship('Place', backref='placeC')
 
     def __repr__(self):
@@ -63,8 +64,8 @@ class PlaceC(db.Model):
 class Place(db.Model):
     __tablename__ = 'places'
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(nameSize), unique=True)
-    coordinate = db.Column(db.String(coordinateSize))
+    name = db.Column(db.String(Size.nameSize), unique=True)
+    coordinate = db.Column(db.String(Size.coordinateSize))
     placeC_id = db.Column(db.Integer, db.ForeignKey('placeCs.id'))
 
     def __repr__(self):
@@ -77,7 +78,7 @@ class Place(db.Model):
 class OrganizationC(db.Model):
     __tablename__ = 'organizationCs'
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(nameSize), unique=True)
+    name = db.Column(db.String(Size.nameSize), unique=True)
     organizationInfo = db.relationship('OrganizationInfo', backref='organizationC')
 
     def __repr__(self):
@@ -89,10 +90,10 @@ class OrganizationC(db.Model):
 class OrganizationInfo(db.Model):
     __tablename__ = 'organizationInfos'
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(nameSize), unique=True)
-    content = db.Column(db.String(contentSize))
-    image = db.Column(db.String(imageSize))
-    origin = db.Column(db.String(originSize))
+    name = db.Column(db.String(Size.nameSize), unique=True)
+    content = db.Column(db.String(Size.contentSize))
+    image = db.Column(db.String(Size.imageSize))
+    origin = db.Column(db.String(Size.originSize))
     organizationC_id = db.Column(db.Integer, db.ForeignKey('organizationCs.id'))
 
     def __repr__(self):
@@ -104,14 +105,14 @@ class OrganizationInfo(db.Model):
 class OrganizationMessage(db.Model):
     __tablename__ = 'organizationMessages'
     id = db.Column(db.Integer, primary_key=True)
-    title = db.Column(db.String(titleSize))
-    createTime = db.Column(db.String(createTimeSize))
-    activeTime = db.Column(db.String(activeTimeSize))
+    title = db.Column(db.String(Size.titleSize))
+    createTime = db.Column(db.String(Size.createTimeSize))
+    activeTime = db.Column(db.String(Size.activeTimeSize))
     state = db.Column(db.Integer)  # 状态（是否删除）
-    content = db.Column(db.String(contentSize))
-    image = db.Column(db.String(imageSize))
+    content = db.Column(db.String(Size.contentSize))
+    image = db.Column(db.String(Size.imageSize))
     agreeNum = db.Column(db.Integer)  # 点赞数
-    attachment = db.Column(db.String(attachmentSize))
+    attachment = db.Column(db.String(Size.attachmentSize))
     commentNum = db.Column(db.Integer)
     writer_id = db.Column(db.Integer)
     organizationMessageComment = db.relationship('OrganizationMessageComment', backref='organizationMessage')
@@ -127,8 +128,8 @@ class OrganizationMessageComment(db.Model):
     __tablename__ = 'organizationMessageComments'
     id = db.Column(db.Integer, primary_key=True)
     state = db.Column(db.Integer)  # 状态（是否删除）
-    createTime = db.Column(db.String(createTimeSize))
-    content = db.Column(db.String(contentSize))
+    createTime = db.Column(db.String(Size.createTimeSize))
+    content = db.Column(db.String(Size.contentSize))
     writer_id = db.Column(db.Integer)  # 发布者id
     replied_id = db.Column(db.Integer)  # 回复的评论的作者id
     message_id = db.Column(db.Integer, db.ForeignKey('organizationMessages.id'))  # 对应信息的id
@@ -142,9 +143,9 @@ class OrganizationMessageComment(db.Model):
 class Message(db.Model):
     __tablename__ = 'messages'
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(nameSize), unique=True)
-    content = db.Column(db.String(contentSize))
-    image = db.Column(db.String(imageSize))
+    name = db.Column(db.String(Size.nameSize), unique=True)
+    content = db.Column(db.String(Size.contentSize))
+    image = db.Column(db.String(Size.imageSize))
 
     def __repr__(self):
         return "{'id':%d,'name':'%s','content':'%s','image':'%s'}" \
@@ -156,7 +157,7 @@ class Message(db.Model):
 class PlayC(db.Model):
     __tablename__ = 'playCs'
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(nameSize), unique=True)
+    name = db.Column(db.String(Size.nameSize), unique=True)
     play = db.relationship('Play', backref='playC')
 
     def __repr__(self):
@@ -168,12 +169,12 @@ class PlayC(db.Model):
 class Play(db.Model):
     __tablename__ = 'plays'
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(nameSize), unique=True)
-    content = db.Column(db.String(contentSize))
-    image = db.Column(db.String(imageSize))
-    local = db.Column(db.String(localSize))
-    phone = db.Column(db.String(phoneSize))
-    origin = db.Column(db.String(originSize))
+    name = db.Column(db.String(Size.nameSize), unique=True)
+    content = db.Column(db.String(Size.contentSize))
+    image = db.Column(db.String(Size.imageSize))
+    local = db.Column(db.String(Size.localSize))
+    phone = db.Column(db.String(Size.phoneSize))
+    origin = db.Column(db.String(Size.originSize))
     playC_id = db.Column(db.Integer, db.ForeignKey('playCs.id'))
 
     def __repr__(self):
@@ -186,9 +187,9 @@ class Play(db.Model):
 class UsrMessage(db.Model):
     __tablename__ = 'usrMessages'
     id = db.Column(db.Integer, primary_key=True)
-    createTime = db.Column(db.String(createTimeSize))
-    content = db.Column(db.String(contentSize))
-    image = db.Column(db.String(imageSize))
+    createTime = db.Column(db.String(Size.createTimeSize))
+    content = db.Column(db.String(Size.contentSize))
+    image = db.Column(db.String(Size.imageSize))
     agreeNum = db.Column(db.Integer)  # 点赞数
     commentNum = db.Column(db.Integer)  # 评论数
     state = db.Column(db.Integer)  # 状态（是否删除）
@@ -205,8 +206,8 @@ class UsrMessage(db.Model):
 class UsrMessageComment(db.Model):
     __tablename__ = 'usrMessageComments'
     id = db.Column(db.Integer, primary_key=True)
-    createTime = db.Column(db.String(createTimeSize))
-    content = db.Column(db.String(contentSize))
+    createTime = db.Column(db.String(Size.createTimeSize))
+    content = db.Column(db.String(Size.contentSize))
     state = db.Column(db.Integer)  # 状态（是否删除）
     writer_id = db.Column(db.Integer)  # 发布者id
     replied_id = db.Column(db.Integer)  # 回复的评论的作者id
@@ -222,7 +223,7 @@ class UsrMessageComment(db.Model):
 class GoodsC(db.Model):
     __tablename__ = 'goodsCs'
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(nameSize), unique=True)
+    name = db.Column(db.String(Size.nameSize), unique=True)
 
     def __repr__(self):
         return "{'id':%d,'name':'%s'}" \
@@ -233,18 +234,18 @@ class GoodsC(db.Model):
 class Goods(db.Model):
     __tablename__ = 'goodss'
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(nameSize))
-    createTime = db.Column(db.String(createTimeSize))
+    name = db.Column(db.String(Size.nameSize))
+    createTime = db.Column(db.String(Size.createTimeSize))
     state = db.Column(db.Integer)  # 状态（是否删除）
     price = db.Column(db.Integer)
-    content = db.Column(db.String(contentSize))
-    image = db.Column(db.String(imageSize))
-    phone = db.Column(db.String(phoneSize))
-    wechat = db.Column(db.String(wechatSize))
-    email = db.Column(db.String(emailSize))
+    content = db.Column(db.String(Size.contentSize))
+    image = db.Column(db.String(Size.imageSize))
+    phone = db.Column(db.String(Size.phoneSize))
+    wechat = db.Column(db.String(Size.wechatSize))
+    email = db.Column(db.String(Size.emailSize))
     commentNum = db.Column(db.Integer)
     writer_id = db.Column(db.Integer)  # 商家账号id
-    type = db.Column(db.String(typeSize))
+    type = db.Column(db.String(Size.typeSize))
     goodsComment = db.relationship('GoodsComment', backref='goods')
 
     def __repr__(self):
@@ -258,8 +259,8 @@ class GoodsComment(db.Model):
     __tablename__ = 'goodsComments'
     id = db.Column(db.Integer, primary_key=True)
     state = db.Column(db.Integer)  # 状态（是否删除）
-    createTime = db.Column(db.String(createTimeSize))
-    content = db.Column(db.String(contentSize))
+    createTime = db.Column(db.String(Size.createTimeSize))
+    content = db.Column(db.String(Size.contentSize))
     writer_id = db.Column(db.Integer)  # 发布者id
     replied_id = db.Column(db.Integer)  # 回复的评论的作者id
     goods_id = db.Column(db.Integer, db.ForeignKey('goodss.id'))  # 对应商品的id
@@ -274,10 +275,10 @@ class GoodsComment(db.Model):
 class UsrInfo(db.Model):
     __tablename__ = 'usrInfos'
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(nameSize))
-    account = db.Column(db.String(accountSize), unique=True)
-    password = db.Column(db.String(passwordSize))
-    permission = db.Column(db.String(permissionSize))
+    name = db.Column(db.String(Size.nameSize))
+    account = db.Column(db.String(Size.accountSize), unique=True)
+    password = db.Column(db.String(Size.passwordSize))
+    permission = db.Column(db.String(Size.permissionSize))
 
     def hash_password(self, passWord):  # 给密码加密方法
         h = hmac.new('HelloSTU'.encode('utf-8'))
@@ -299,7 +300,7 @@ class UsrInfo(db.Model):
 class QuestionC(db.Model):
     __tablename__ = 'questionCs'
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(nameSize), unique=True)
+    name = db.Column(db.String(Size.nameSize), unique=True)
     question = db.relationship('Question', backref='questionC')
 
     def __repr__(self):
@@ -311,8 +312,8 @@ class QuestionC(db.Model):
 class Question(db.Model):
     __tablename__ = 'questions'
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(nameSize), unique=True)
-    content = db.Column(db.String(contentSize))
+    name = db.Column(db.String(Size.nameSize), unique=True)
+    content = db.Column(db.String(Size.contentSize))
     questionC_id = db.Column(db.Integer, db.ForeignKey('questionCs.id'))
 
     def __repr__(self):
@@ -324,7 +325,7 @@ class Question(db.Model):
 class UseC(db.Model):
     __tablename__ = 'useCs'
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(nameSize), unique=True)
+    name = db.Column(db.String(Size.nameSize), unique=True)
     use = db.relationship('Use', backref='useC')
 
     def __repr__(self):
@@ -336,8 +337,8 @@ class UseC(db.Model):
 class Use(db.Model):
     __tablename__ = 'uses'
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(nameSize), unique=True)
-    content = db.Column(db.String(contentSize))
+    name = db.Column(db.String(Size.nameSize), unique=True)
+    content = db.Column(db.String(Size.contentSize))
     useC_id = db.Column(db.Integer, db.ForeignKey('useCs.id'))
 
     def __repr__(self):
