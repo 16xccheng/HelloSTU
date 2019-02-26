@@ -9,7 +9,6 @@
 # -*- coding:utf-8 -*-
 from init import *
 
-
 # ##################################################### 程序运行 ###################################################### #
 if __name__ == '__main__':
     app.run(host=config.HOST, port=config.PORT, debug=config.DEBUG)
