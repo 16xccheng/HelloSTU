@@ -2,7 +2,7 @@
 
 ## 统一接口前缀：
 
-http://120.77.36.131/HelloSTU
+http://主机地址/HelloSTU
 
 
 
@@ -31,7 +31,7 @@ URL中的   t_name，即对应景点名字
  	'id':6,
  	'name':'2019.2.16',
  	'content':'2019.2.16',
- 	'image':'http://120.77.36.131/_uploads/images/88x7uv4draw6qs22.png',
+ 	'image':'http://主机地址/_uploads/images/88x7uv4draw6qs22.png',
  	'origin':'2019.2.16'
  }
 ```
@@ -48,7 +48,7 @@ URL中的   t_name，即对应景点名字
 
 #### 备注：
 
-（测试）可上传新景点http://120.77.36.131/HelloSTU/scenery/add/
+（测试）可上传新景点http://主机地址/HelloSTU/scenery/add/
 
 
 
@@ -162,7 +162,7 @@ URL中的 t_id，即对应地点id
 
 coordinate内容有  ;  隔开，经度;纬度
 
-（测试）可上传新地点http://120.77.36.131//HelloSTU/place/add/
+（测试）可上传新地点http://主机地址/HelloSTU/place/add/
 
 
 
@@ -249,7 +249,7 @@ url中的 t_name，即对应组织名称
 
 #### 备注：
 
-（测试）可上传新组织http://120.77.36.131/HelloSTU/organization/add/
+（测试）可上传新组织http://主机地址/HelloSTU/organization/add/
 
 
 
@@ -565,7 +565,7 @@ GET
 
 #### 备注
 
-（测试）可上传新周边http://120.77.36.131/HelloSTU/play/add/
+（测试）可上传新周边http://主机地址/HelloSTU/play/add/
 
 
 
