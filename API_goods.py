@@ -23,9 +23,9 @@ goods = Blueprint('API_goods', __name__)
 #   "1": {"id": 2, "name": "学习用品"},
 #   "2": {"id": 3, "name": "饮食用品"},
 #   "3": {"id": 4, "name": "娱乐用品"}}'
-@goods.route('/HelloSTU/goods_class/')
-@cache.cached(timeout=300, key_prefix='goods_class')
-def goods_class():
+@goods.route('/class/')
+@cache.cached(timeout=300)
+def Class():
     temp = GoodsC.query.all()
     title = [i for i in range(len(temp))]
 
@@ -37,9 +37,9 @@ def goods_class():
 #   "1": {"id": 2, "name": "高数", "createTime": "2018-1-31 13:31:13", "image": null},
 #   "2": {"id": 3, "name": "筷子", "createTime": "2018-1-31 13:31:13", "image": null},
 #   "3": {"id": 4, "name": "手柄", "createTime": "2018-1-31 13:31:13", "image": null}}'
-@goods.route('/HelloSTU/goods_list/page=<page>&pagesize=<pagesize>')
-@cache.cached(timeout=300, key_prefix='goods_list')
-def goods_list(page, pagesize):
+@goods.route('/list/page=<page>&pagesize=<pagesize>')
+@cache.cached(timeout=300)
+def List(page, pagesize):
     state1 = Goods.query.filter_by(state=1).all()
     state1 = sorted(state1, key=attrgetter('id'), reverse=False)
     t_max = len(state1) - int(page)*int(pagesize) - 1
@@ -69,17 +69,17 @@ def goods_list(page, pagesize):
 # '{"id": 1, "name": "音响", "createTime": "2018-1-31 13:31:13", "state": 1, "price": 999, "content": "音响",
 #   "image": "None", "phone": "10086", "wechat": "None", "email": "None", "commentNum": 1, "writer_id": 1,
 #   "type": "生活用品"}'
-@goods.route('/HelloSTU/goods/id=<t_id>')
-@cache.cached(timeout=300, key_prefix='goods')
-def _goods(t_id):
+@goods.route('/id=<t_id>')
+@cache.cached(timeout=300)
+def Goods(t_id):
     temp = Goods.query.filter_by(id=t_id).first()
 
     return json.dumps(eval(str(temp)), ensure_ascii=False)
 
 
 # 上传新商品
-@goods.route('/HelloSTU/add_goods/', methods=['GET', 'POST'])
-def add_goods():
+@goods.route('/add/', methods=['GET', 'POST'])
+def Add():
     form = GoodsForm()
     if request.method == 'POST':
         writer_id = form.writer_id.data
@@ -122,17 +122,17 @@ def add_goods():
 # 物品评论--输入：物品id--返回：json列表
 # {"0": {"id": 1, "state": 1, "createTime": "2019-02-10 17:03:36", "content": "我觉得这是1手的", "writer_id": 2,
 #  "replied_id": -1, "goods_id": 1, "writer_name": "网球社主席", "replied_name": "null"}}
-@goods.route('/HelloSTU/goods_comment/id=<t_id>')
-@cache.cached(timeout=300, key_prefix='goods_comment')
-def goods_comment(t_id):
+@goods.route('/comment/id=<t_id>')
+@cache.cached(timeout=300)
+def Comment(t_id):
     temp = GoodsComment.query.filter_by(goods_id=t_id, state=1).all()
     title = [i for i in range(len(temp))]
 
     return json.dumps(add_element2(temp, title), ensure_ascii=False)
 
 
-@goods.route('/HelloSTU/add_goods_comment/', methods=['GET', 'POST'])
-def add_goods_comment():
+@goods.route('/comment/add/', methods=['GET', 'POST'])
+def Comment_add():
     form = GoodsCommentForm()
     if request.method == 'POST':
         writer_id = form.writer_id.data

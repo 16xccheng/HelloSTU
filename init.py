@@ -41,12 +41,12 @@ app.secret_key = config.SECRET_KEY
 
 # 蓝图
 from API_communicate import communicate
-app.register_blueprint(communicate, url_prefix='')
+app.register_blueprint(communicate, url_prefix='/HelloSTU/communicate')
 from API_content import content
-app.register_blueprint(content, url_prefix='')
+app.register_blueprint(content, url_prefix='/HelloSTU')
 from API_goods import goods
-app.register_blueprint(goods, url_prefix='')
+app.register_blueprint(goods, url_prefix='/HelloSTU/goods')
 from API_organization import organization
-app.register_blueprint(organization, url_prefix='')
+app.register_blueprint(organization, url_prefix='/HelloSTU/organization')
 from API_user import user
-app.register_blueprint(user, url_prefix='')
+app.register_blueprint(user, url_prefix='/HelloSTU/user')

@@ -18,8 +18,8 @@ user = Blueprint('API_user', __name__)
 
 # 8.我的
 # 用户注册
-@user.route('/HelloSTU/usr_register/', methods=['GET', 'POST'])
-def usr_register():
+@user.route('/register/', methods=['GET', 'POST'])
+def Register():
     form = UsrRegisterForm()
     if request.method == 'POST':
         name = form.name.data
@@ -46,8 +46,8 @@ def usr_register():
 # 用户登录
 # {"id": 12, "name": "cxc", "account": "16xccheng3", "permission": "user",
 #  "token": "MTU1MDQxNTY3MC4zMDQ3NTQzOmQzOGQ5MGQ1YmZhMmVjNWVlMjdiYjRiMzkyMjA3MjUzMTdkYTViMWE="}
-@user.route('/HelloSTU/usr_login/', methods=['GET', 'POST'])
-def usr_login():
+@user.route('/login/', methods=['GET', 'POST'])
+def Login():
     form = UsrLoginForm()
     if request.method == 'POST':
         account = form.account.data

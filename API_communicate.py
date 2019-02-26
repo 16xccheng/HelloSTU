@@ -25,9 +25,9 @@ communicate = Blueprint('API_communicate', __name__)
 #        "commentNum": 1, "state": 1, "writer_id": 2, "writer_name": "网球社主席"},
 #  "2": {"id": 3, "createTime": "2019-02-10 17:03:36", "content": "我说3", "image": "None", "agreeNum": 3,
 #        "commentNum": 1, "state": 1, "writer_id": 3, "writer_name": "青协主席"}}
-@communicate.route('/HelloSTU/usr_message/page=<page>&pagesize=<pagesize>')
-@cache.cached(timeout=300, key_prefix='usr_message')
-def usr_message(page, pagesize):
+@communicate.route('/message/page=<page>&pagesize=<pagesize>')
+@cache.cached(timeout=300)
+def Message(page, pagesize):
     state1 = UsrMessage.query.filter_by(state=1).all()
     state1 = sorted(state1, key=attrgetter('id'), reverse=False)
     t_max = len(state1) - int(page)*int(pagesize) - 1
@@ -45,8 +45,8 @@ def usr_message(page, pagesize):
     return json.dumps(add_element1(temp, title), ensure_ascii=False)
 
 
-@communicate.route('/HelloSTU/add_usr_message/', methods=['GET', 'POST'])
-def add_usr_message():
+@communicate.route('/message/add/', methods=['GET', 'POST'])
+def Message_add():
     form = UsrMessageForm()
     if request.method == 'POST':
         writer_id = form.writer_id.data
@@ -79,17 +79,17 @@ def add_usr_message():
 # 用户发布信息评论--输入：信息对应id--返回：json列表
 # {"0": {"id": 1, "createTime": "2019-02-10 17:03:36", "content": "我说1说得对", "state": 1, "writer_id": 4,
 #        "replied_id": -1, "message_id": 1, "writer_name": "宋兵甲", "replied_name": "null"}}
-@communicate.route('/HelloSTU/usr_message_comment/id=<t_id>')
-@cache.cached(timeout=300, key_prefix='usr_message_comment')
-def usr_message_comment(t_id):
+@communicate.route('/comment/id=<t_id>')
+@cache.cached(timeout=300)
+def Comment(t_id):
     temp = UsrMessageComment.query.filter_by(message_id=t_id, state=1).all()
     title = [i for i in range(len(temp))]
 
     return json.dumps(add_element2(temp, title), ensure_ascii=False)
 
 
-@communicate.route('/HelloSTU/add_usr_message_comment/', methods=['GET', 'POST'])
-def add_usr_message_comment():
+@communicate.route('/comment/add/', methods=['GET', 'POST'])
+def Comment_add():
     form = UsrMessageCommentForm()
     if request.method == 'POST':
         writer_id = form.writer_id.data
