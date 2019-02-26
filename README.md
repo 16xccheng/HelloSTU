@@ -14,7 +14,7 @@ http://120.77.36.131/HelloSTU
 
 #### 请求URL
 
-前缀+/scenery_info/name=<t_name>
+前缀+/scenery/info/name=<t_name>
 
 #### 请求方式
 
@@ -48,7 +48,7 @@ URL中的   t_name，即对应景点名字
 
 #### 备注：
 
-（测试）可上传新景点http://120.77.36.131/HelloSTU/add_scenery/
+（测试）可上传新景点http://120.77.36.131/HelloSTU/scenery/add/
 
 
 
@@ -58,7 +58,7 @@ URL中的   t_name，即对应景点名字
 
 #### 请求URL
 
-前缀+/place_class/
+前缀+/place/class/
 
 #### 请求方式
 
@@ -120,7 +120,7 @@ GET
 
 #### 请求URL
 
-前缀+/place_list/id=<t_id>
+前缀+/place/list/id=<t_id>
 
 #### 请求方式
 
@@ -162,7 +162,7 @@ URL中的 t_id，即对应地点id
 
 coordinate内容有  ;  隔开，经度;纬度
 
-（测试）可上传新地点http://120.77.36.131//HelloSTU/add_place/
+（测试）可上传新地点http://120.77.36.131//HelloSTU/place/add/
 
 
 
@@ -172,7 +172,7 @@ coordinate内容有  ;  隔开，经度;纬度
 
 #### 请求URL
 
-前缀+/organization_class/
+前缀+/organization/class/
 
 #### 请求方式
 
@@ -213,7 +213,7 @@ GET
 
 #### 请求URL
 
-前缀+/organization_info/name=<t_name>
+前缀+/organization/info/name=<t_name>
 
 #### 请求方式
 
@@ -249,7 +249,7 @@ url中的 t_name，即对应组织名称
 
 #### 备注：
 
-（测试）可上传新组织http://120.77.36.131/HelloSTU/add_organization/
+（测试）可上传新组织http://120.77.36.131/HelloSTU/organization/add/
 
 
 
@@ -257,7 +257,7 @@ url中的 t_name，即对应组织名称
 
 #### 请求URL
 
-前缀+/organization_message/page=<page>&pagesize=<pagesize>
+前缀+/organization/message/page=<page>&pagesize=<pagesize>
 
 #### 请求方式
 
@@ -343,7 +343,7 @@ url中的“page”和“pagesize”，即请求页码和请求页面大小
 
 #### 请求URL
 
-前缀+/add_organization_message/
+前缀+/organization/message/add/
 
 #### 请求方式
 
@@ -380,7 +380,7 @@ token保存在客户端
 
 #### 请求URL
 
-前缀+/organization_message_comment/id=<t_id>
+前缀+/organization/comment/id=<t_id>
 
 #### 请求方式
 
@@ -432,7 +432,7 @@ replied_id若为-1，则无被回复者，replied_name返回值为null
 
 #### 请求URL
 
-前缀+/add_organization_message_comment/
+前缀+/organization/comment/add/
 
 #### 请求方式
 
@@ -469,7 +469,7 @@ token保存在客户端，无被回复者则传输replied_id为-1
 
 #### 请求URL
 
-前缀+/message_list/
+前缀+/message/list/
 
 #### 请求方式
 
@@ -499,7 +499,7 @@ GET
 
 #### 请求URL
 
-前缀+/message_info/name=<t_name>
+前缀+/message/info/name=<t_name>
 
 #### 请求方式
 
@@ -537,7 +537,7 @@ url中的 t_name，即对应信息的名称
 
 #### 请求URL
 
-前缀+/play_class/
+前缀+/play/class/
 
 #### 请求方式
 
@@ -565,7 +565,7 @@ GET
 
 #### 备注
 
-（测试）可上传新周边http://120.77.36.131/HelloSTU/add_play/
+（测试）可上传新周边http://120.77.36.131/HelloSTU/play/add/
 
 
 
@@ -573,7 +573,7 @@ GET
 
 #### 请求URL
 
-前缀+/play_list/class_id=<t_class_id>
+前缀+/play/list/class_id=<t_class_id>
 
 #### 请求方式
 
@@ -661,7 +661,7 @@ url中的 t_id，即对应信息id
 
 #### 请求URL
 
-前缀+/usr_message/page=<page>&pagesize=<pagesize>
+前缀+/communicate/message/page=<page>&pagesize=<pagesize>
 
 #### 请求方式
 
@@ -731,7 +731,7 @@ url中的“page”和“pagesize”，即页码和页面大小
 
 #### 请求URL
 
-前缀+/add_usr_message/
+前缀+/communicate/message/add/
 
 #### 请求方式
 
@@ -765,7 +765,7 @@ token保存在客户端
 
 #### 请求URL
 
-前缀+/usr_message_comment/id=<t_id>
+前缀+/communicate/comment/id=<t_id>
 
 #### 请求方式
 
@@ -813,7 +813,7 @@ url中的 t_id，即对应信息id
 
 #### 请求URL
 
-前缀+/add_usr_message_comment/
+前缀+/communicate/comment/add/
 
 #### 请求方式
 
@@ -850,7 +850,7 @@ token保存在客户端，无被回复者则传输replied_id为-1
 
 #### 请求URL
 
-前缀+/goods_class/
+前缀+/goods/class/
 
 #### 请求方式
 
@@ -882,7 +882,7 @@ GET
 
 #### 请求URL
 
-前缀+/goods_list/page=<page>&pagesize=<pagesize>
+前缀+/goods/list/page=<page>&pagesize=<pagesize>
 
 #### 请求方式
 
@@ -992,7 +992,7 @@ url中的 t_id，即对应物品id
 
 #### 请求URL
 
-前缀+/add_goods/
+前缀+/goods/add/
 
 #### 请求方式
 
@@ -1032,7 +1032,7 @@ token保存在客户端
 
 #### 请求URL
 
-前缀+/goods_comment/id=<t_id>
+前缀+/goods/comment/id=<t_id>
 
 #### 请求方式
 
@@ -1080,7 +1080,7 @@ url中 t_id，即对应物品id
 
 #### 请求URL
 
-前缀+/add_usr_message_comment/
+前缀+/goods/comment/add/
 
 #### 请求方式
 
@@ -1117,7 +1117,7 @@ token保存在客户端，无被回复者则传输replied_id为-1
 
 #### 请求URL
 
-前缀+/usr_register/
+前缀+/user/register/
 
 #### 请求方式
 
@@ -1149,7 +1149,7 @@ POST
 
 #### 请求URL
 
-前缀+/usr_login/
+前缀+/user/login/
 
 #### 请求方式
 
@@ -1189,7 +1189,7 @@ POST
 
 #### 请求URL
 
-前缀+/question_class/
+前缀+/question/class/
 
 #### 请求方式
 
@@ -1259,7 +1259,7 @@ url中的 t_id，即对应类别id
 
 #### 请求URL
 
-前缀+/use_class/
+前缀+/use/class/
 
 #### 请求方式
 

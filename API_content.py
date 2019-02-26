@@ -29,7 +29,7 @@ def Scenery_info(t_name):
 
 
 # 上传新景点
-@content.route('/scenery/add', methods=['GET', 'POST'])
+@content.route('/scenery/add/', methods=['GET', 'POST'])
 def Scenery_add():
     form = SceneryForm()
     if request.method == 'POST':
