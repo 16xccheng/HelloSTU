@@ -19,7 +19,7 @@ content = Blueprint('API_content', __name__)
 
 # 1.景点
 # 请求景点信息--输入：名称--返回：具体信息
-# '{'id':6,'name':'2019.2.16','content':'2019.2.16','image':'http://120.77.36.131/_uploads/images/88x7uv4draw6qs22.png','origin':'2019.2.16'}'
+# '{'id':6,'name':'2019.2.16','content':'2019.2.16','image':'http://主机地址/_uploads/images/88x7uv4draw6qs22.png','origin':'2019.2.16'}'
 @content.route('/scenery/info/name=<t_name>')
 @cache.cached(timeout=300)  # timeout:缓存有效期,默认300s,key_prefix:缓存键前缀,默认:view/+路由地址
 def Scenery_info(t_name):
