@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+{% extends 'bootstrap/base.html' %}
+{% from 'bootstrap/wtf.html' import quick_form %}
+
+{% block content %}
+    <div class="container">
+        {{ quick_form(form) }}
+    </div>
+{% endblock %}
+
+{% for message in get_flashed_messages() %}
+    {{ message }}
+{% endfor %}
+
+</body>
+</html>

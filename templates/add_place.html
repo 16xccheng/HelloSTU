@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<form method="post">
+    {{ form.csrf_token }}
+    {{ form.name.label }}{{ form.name() }}<br>
+    {{ form.coordinate.label }}{{ form.coordinate() }}<br>
+    {{ form.placeC_id.label }}{{ form.placeC_id() }}<br>
+    {{ form.submit() }}<br>
+    {# 显示消息闪现内容 #}
+    {% for message in get_flashed_messages() %}
+        {{ message }}
+    {% endfor %}
+</form>
+
+</body>
+</html>

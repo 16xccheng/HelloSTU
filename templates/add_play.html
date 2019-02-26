@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<form method="post">
+    {{ form.csrf_token }}
+    {{ form.name.label }}{{ form.name() }}<br>
+    {{ form.content.label }}{{ form.content() }}<br>
+    {{ form.image.label }}{{ form.image() }}<br>
+    {{ form.local.label }}{{ form.local() }}<br>
+    {{ form.origin.label }}{{ form.origin() }}<br>
+    {{ form.playC_id.label }}{{ form.playC_id() }}<br>
+    {{ form.submit() }}<br>
+    {# 显示消息闪现内容 #}
+    {% for message in get_flashed_messages() %}
+        {{ message }}
+    {% endfor %}
+</form>
+
+</body>
+</html>
