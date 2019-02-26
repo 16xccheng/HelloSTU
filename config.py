@@ -29,7 +29,7 @@ CACHE = {
     "CACHE_REDIS_HOST": "127.0.0.1",  # 主机
     "CACHE_REDIS_PORT": 6379,  # 端口
     "CACHE_REDIS_PASSWORD": "ljgljgljg",  # 密码
-    "CACHE_REDIS_DB": 16  # 数据库
+    "CACHE_REDIS_DB": 15  # 数据库
 }
 
 

@@ -16,13 +16,7 @@ bootstrap = Bootstrap(app)
 
 
 # 配置缓存
-cache = Cache(app, config={
-    "CACHE_TYPE": "redis",  # 类型
-    "CACHE_REDIS_HOST": "127.0.0.1",  # 主机
-    "CACHE_REDIS_PORT": 6379,  # 端口
-    "CACHE_REDIS_PASSWORD": "ljgljgljg",  # 密码
-    "CACHE_REDIS_DB": 15  # 数据库
-})
+cache = Cache(app, config=config.CACHE)
 
 # 设置数据库
 app.config['SQLALCHEMY_DATABASE_URI'] = config.SQLALCHEMY_DATABASE_URI

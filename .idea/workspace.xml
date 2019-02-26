@@ -2,12 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e8041b14-d9fd-43c5-8ab2-764f9ab0634d" name="Default Changelist" comment="结构优化">
-      <change beforePath="$PROJECT_DIR$/communicate.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/content.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/goods.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config.py" beforeDir="false" afterPath="$PROJECT_DIR$/config.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/init.py" beforeDir="false" afterPath="$PROJECT_DIR$/init.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/organization.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/user.py" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -37,20 +34,20 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="252">
-              <caret line="14" column="49" selection-start-line="14" selection-start-column="49" selection-end-line="14" selection-end-column="49" />
+              <caret line="14" column="41" lean-forward="true" selection-start-line="14" selection-start-column="41" selection-end-line="14" selection-end-column="41" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/init.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="414">
-              <caret line="23" column="24" selection-start-line="23" selection-start-column="24" selection-end-line="23" selection-end-column="24" />
+            <state relative-caret-position="198">
+              <caret line="11" lean-forward="true" selection-start-line="11" selection-end-line="11" />
               <folding>
                 <element signature="e#46#55#0" expanded="true" />
               </folding>
@@ -61,8 +58,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/config.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="230">
-              <caret line="26" column="8" lean-forward="true" selection-start-line="26" selection-start-column="8" selection-end-line="32" selection-end-column="1" />
+            <state relative-caret-position="194">
+              <caret line="24" lean-forward="true" selection-start-line="24" selection-end-line="24" />
             </state>
           </provider>
         </entry>
@@ -135,8 +132,6 @@
         <option value="$PROJECT_DIR$/forms.py" />
         <option value="$PROJECT_DIR$/methods/__init__.py" />
         <option value="$PROJECT_DIR$/app-副本.py" />
-        <option value="$PROJECT_DIR$/app.py" />
-        <option value="$PROJECT_DIR$/config.py" />
         <option value="$PROJECT_DIR$/user.py" />
         <option value="$PROJECT_DIR$/communicate.py" />
         <option value="$PROJECT_DIR$/content.py" />
@@ -148,6 +143,8 @@
         <option value="$PROJECT_DIR$/API_user.py" />
         <option value="$PROJECT_DIR$/API_goods.py" />
         <option value="$PROJECT_DIR$/init.py" />
+        <option value="$PROJECT_DIR$/config.py" />
+        <option value="$PROJECT_DIR$/app.py" />
       </list>
     </option>
   </component>
@@ -346,12 +343,12 @@
       <workItem from="1550295525472" duration="7920000" />
       <workItem from="1550409596062" duration="23646000" />
       <workItem from="1550977999767" duration="180000" />
-      <workItem from="1551071324851" duration="30756000" />
+      <workItem from="1551071324851" duration="31487000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="317620000" />
+    <option name="totallyTimeSpent" value="318351000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -761,13 +758,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="252">
-          <caret line="14" column="49" selection-start-line="14" selection-start-column="49" selection-end-line="14" selection-end-column="49" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/API_goods.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="18">
@@ -790,18 +780,25 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/config.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="230">
-          <caret line="26" column="8" lean-forward="true" selection-start-line="26" selection-start-column="8" selection-end-line="32" selection-end-column="1" />
+        <state relative-caret-position="194">
+          <caret line="24" lean-forward="true" selection-start-line="24" selection-end-line="24" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/init.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="414">
-          <caret line="23" column="24" selection-start-line="23" selection-start-column="24" selection-end-line="23" selection-end-column="24" />
+        <state relative-caret-position="198">
+          <caret line="11" lean-forward="true" selection-start-line="11" selection-end-line="11" />
           <folding>
             <element signature="e#46#55#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="252">
+          <caret line="14" column="41" lean-forward="true" selection-start-line="14" selection-start-column="41" selection-end-line="14" selection-end-column="41" />
         </state>
       </provider>
     </entry>
