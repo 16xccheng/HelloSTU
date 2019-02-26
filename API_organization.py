@@ -14,7 +14,7 @@ from models import OrganizationC, OrganizationInfo, OrganizationMessage, Organiz
 
 sys.path.append(config.METHODS_PATH)
 
-organizations = Blueprint('organization', __name__)
+organization = Blueprint('API_organization', __name__)
 
 
 # 3.学校组织信息
@@ -24,7 +24,7 @@ organizations = Blueprint('organization', __name__)
 #   "组织": {"0": {"id": 1, "name": "学生会"},
 #           "1": {"id": 3, "name": "青协"}}
 #  }'
-@organizations.route('/HelloSTU/organization_class/')
+@organization.route('/HelloSTU/organization_class/')
 @cache.cached(timeout=300, key_prefix='organization_class')
 def organization_class():
     temp = OrganizationC.query.all()
@@ -47,7 +47,7 @@ def organization_class():
 
 # 返回对应组织基本信息--输入：组织名--返回：具体信息
 # '{"id": 1, "name": "学生会", "content": "学生会", "image": "None", "origin": "学生会", "organizationC_id": "1"}'
-@organizations.route('/HelloSTU/organization_info/name=<t_name>')
+@organization.route('/HelloSTU/organization_info/name=<t_name>')
 @cache.cached(timeout=300, key_prefix='organization_info')
 def organization_info(t_name):
     temp = OrganizationInfo.query.filter_by(name=t_name).first()
@@ -56,7 +56,7 @@ def organization_info(t_name):
 
 
 # 上传新组织
-@organizations.route('/HelloSTU/add_organization/', methods=['GET', 'POST'])
+@organization.route('/HelloSTU/add_organization/', methods=['GET', 'POST'])
 def add_organization():
     form = OrganizationForm()
     if request.method == 'POST':
@@ -93,7 +93,7 @@ def add_organization():
 #  "2": {"id": 3, "title": "青协活动1", "createTime": "2019-02-10 17:03:36", "activeTime": "2018-2019", "state": 1,
 #        "content": "青协活动1", "image": "None", "agreeNum": 1, "attachment": "None", "commentNum": 1, "writer_id": 3,
 #        "writer_name": "青协主席"}}
-@organizations.route('/HelloSTU/organization_message/page=<page>&pagesize=<pagesize>')
+@organization.route('/HelloSTU/organization_message/page=<page>&pagesize=<pagesize>')
 @cache.cached(timeout=300, key_prefix='organization_message')
 def organization_message(page, pagesize):  # 先转int
     state1 = OrganizationMessage.query.filter_by(state=1).all()  # 过滤删除的信息
@@ -115,7 +115,7 @@ def organization_message(page, pagesize):  # 先转int
     return json.dumps(add_element1(temp, title), ensure_ascii=False)
 
 
-@organizations.route('/HelloSTU/add_organization_message/', methods=['GET', 'POST'])
+@organization.route('/HelloSTU/add_organization_message/', methods=['GET', 'POST'])
 def add_organization_message():
     form = OrganizationMessageForm()
     if request.method == 'POST':
@@ -153,7 +153,7 @@ def add_organization_message():
 # 返回对应组织发布信息评论--输入对应的文本的id（可能要返回发布者信息和被回复者信息）--返回：json列表
 # '{"0": {"id": 1, "state": 1, "createTime": "2019-02-10 17:03:36", "content": "我觉得学生会说得对", "writer_id": 4,
 #   "replied_id": -1, "message_id": 1, "writer_name": "宋兵甲", "replied_name": "null"}'
-@organizations.route('/HelloSTU/organization_message_comment/id=<t_id>')
+@organization.route('/HelloSTU/organization_message_comment/id=<t_id>')
 @cache.cached(timeout=300, key_prefix='organization_message_comment')
 def organization_message_comment(t_id):
     temp = OrganizationMessageComment.query.filter_by(message_id=t_id, state=1).all()
@@ -162,7 +162,7 @@ def organization_message_comment(t_id):
     return json.dumps(add_element2(temp, title), ensure_ascii=False)
 
 
-@organizations.route('/HelloSTU/add_organization_message_comment/', methods=['GET', 'POST'])
+@organization.route('/HelloSTU/add_organization_message_comment/', methods=['GET', 'POST'])
 def add_organization_message_comment():
     form = OrganizationMessageCommentForm()
     if request.method == 'POST':

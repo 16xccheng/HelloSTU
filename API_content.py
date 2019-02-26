@@ -14,13 +14,13 @@ from models import Scenery, PlaceC, Place, Message, PlayC, Play, QuestionC, Ques
 
 sys.path.append(config.METHODS_PATH)
 
-contents = Blueprint('content', __name__)
+content = Blueprint('API_content', __name__)
 
 
 # 1.景点
 # 请求景点信息--输入：名称--返回：具体信息
 # '{'id':6,'name':'2019.2.16','content':'2019.2.16','image':'http://120.77.36.131/_uploads/images/88x7uv4draw6qs22.png','origin':'2019.2.16'}'
-@contents.route('/HelloSTU/scenery_info/name=<t_name>')
+@content.route('/HelloSTU/scenery_info/name=<t_name>')
 @cache.cached(timeout=300, key_prefix='scenery_info')  # timeout:缓存有效期,默认300s,key_prefix:缓存键前缀,默认:view/+路由地址
 def scenery_info(t_name):
     temp = Scenery.query.filter_by(name=t_name).first()
@@ -29,7 +29,7 @@ def scenery_info(t_name):
 
 
 # 上传新景点
-@contents.route('/HelloSTU/add_scenery/', methods=['GET', 'POST'])
+@content.route('/HelloSTU/add_scenery/', methods=['GET', 'POST'])
 def add_scenery():
     form = SceneryForm()
     if request.method == 'POST':
@@ -66,7 +66,7 @@ def add_scenery():
 #   "5": {"id": 6, "name": "办公"},
 #   "6": {"id": 7, "name": "生活"},
 #   "7": {"id": 8, "name": "其他"}}'
-@contents.route('/HelloSTU/place_class/')
+@content.route('/HelloSTU/place_class/')
 @cache.cached(timeout=300, key_prefix='place_class')
 def place_class():
     temp = PlaceC.query.all()
@@ -79,7 +79,7 @@ def place_class():
 # 返回地点列表和具体内容--输入：类别id--返回：json列表
 # '{"0": {"id": 1, "name": "至诚书院", "coordinate": "1;1", "placeC_id": 1},
 #   "1": {"id": 9, "name": "弘毅书院", "coordinate": "9;9", "placeC_id": 1}}'
-@contents.route('/HelloSTU/place_list/id=<t_id>')
+@content.route('/HelloSTU/place_list/id=<t_id>')
 @cache.cached(timeout=300, key_prefix='place_list')
 def place_list(t_id):
     temp = Place.query.filter_by(placeC_id=t_id).all()
@@ -89,7 +89,7 @@ def place_list(t_id):
 
 
 # 上传新地点
-@contents.route('/HelloSTU/add_place/', methods=['GET', 'POST'])
+@content.route('/HelloSTU/add_place/', methods=['GET', 'POST'])
 def add_place():
     form = PlaceForm()
     if request.method == 'POST':
@@ -118,7 +118,7 @@ def add_place():
 # '{"1": "校训1",
 #   "2": "校训2",
 #   "3": "校训3"}'
-@contents.route('/HelloSTU/message_list/')
+@content.route('/HelloSTU/message_list/')
 @cache.cached(timeout=300, key_prefix='message_list')
 def message_list():
     temp = Message.query.all()
@@ -131,7 +131,7 @@ def message_list():
 
 # 返回具体信息--输入：名称--返回：具体信息
 # '{"id": 1, "name": "校训1", "content": "有志", "image": "None"}'
-@contents.route('/HelloSTU/message_info/name=<t_name>')
+@content.route('/HelloSTU/message_info/name=<t_name>')
 @cache.cached(timeout=300, key_prefix='message_info')
 def message_info(t_name):
     temp = Message.query.filter_by(name=t_name).first()
@@ -145,7 +145,7 @@ def message_info(t_name):
 #   "1": {"id": 2, "name": "娱乐"},
 #   "2": {"id": 3, "name": "游玩"},
 #   "3": {"id": 4, "name": "出行"}}'
-@contents.route('/HelloSTU/play_class/')
+@content.route('/HelloSTU/play_class/')
 @cache.cached(timeout=300, key_prefix='play_class')
 def play_class():
     temp = PlayC.query.all()
@@ -156,7 +156,7 @@ def play_class():
 
 # 周边列表--输入：所在的类别，返回所有信息--返回：json列表
 # '{"0": {"id": 1, "name": "草莓冰", "content": "草莓冰好吃", "image": null}}'
-@contents.route('/HelloSTU/play_list/class_id=<t_class_id>')
+@content.route('/HelloSTU/play_list/class_id=<t_class_id>')
 @cache.cached(timeout=300, key_prefix='play_list')
 def play_list(t_class_id):
     temp = Play.query.filter_by(playC_id=t_class_id).all()
@@ -176,7 +176,7 @@ def play_list(t_class_id):
 # 周边--输入：周边id--返回：具体信息
 # '{"id": 1, "name": "草莓冰", "content": "草莓冰好吃", "image": "None", "local": "十二中", "phone": "10086",
 #   "origin": "草莓冰", "playC_id": 1}'
-@contents.route('/HelloSTU/play/id=<t_id>')
+@content.route('/HelloSTU/play/id=<t_id>')
 @cache.cached(timeout=300, key_prefix='play')
 def play(t_id):
     temp = Play.query.filter_by(id=t_id).first()
@@ -185,7 +185,7 @@ def play(t_id):
 
 
 # 上传新周边
-@contents.route('/HelloSTU/add_play/', methods=['GET', 'POST'])
+@content.route('/HelloSTU/add_play/', methods=['GET', 'POST'])
 def add_play():
     form = PlayForm()
     if request.method == 'POST':
@@ -216,7 +216,7 @@ def add_play():
 # 问题分类--返回：json列表
 # '{"0": {"id": 1, "name": "功能问题"},
 #   "1": {"id": 2, "name": "内容问题"}}'
-@contents.route('/HelloSTU/question_class/')
+@content.route('/HelloSTU/question_class/')
 @cache.cached(timeout=300, key_prefix='question_class')
 def question_class():
     temp = QuestionC.query.all()
@@ -227,7 +227,7 @@ def question_class():
 
 # 问题内容--返回：json列表
 # '{"0": {"id": 1, "name": "地图导航问题", "content": "爱看不看", "questionC_id": 1}}'
-@contents.route('/HelloSTU/question/id=<t_id>')
+@content.route('/HelloSTU/question/id=<t_id>')
 @cache.cached(timeout=300, key_prefix='question')
 def question(t_id):
     temp = Question.query.filter_by(questionC_id=t_id).all()
@@ -238,7 +238,7 @@ def question(t_id):
 
 # 使用帮助分类--返回：json列表
 # '{"0": {"id": 1, "name": "功能使用"}, "1": {"id": 2, "name": "内容使用"}}'
-@contents.route('/HelloSTU/use_class/')
+@content.route('/HelloSTU/use_class/')
 @cache.cached(timeout=300, key_prefix='use_class')
 def use_class():
     temp = UseC.query.all()
@@ -249,7 +249,7 @@ def use_class():
 
 # 帮助内容
 # '{"0": {"id": 1, "name": "景点", "content": "首页点一下", "useC_id": 1}}'
-@contents.route('/HelloSTU/use/id=<t_id>')
+@content.route('/HelloSTU/use/id=<t_id>')
 @cache.cached(timeout=300, key_prefix='use')
 def use(t_id):
     temp = Use.query.filter_by(useC_id=t_id).all()

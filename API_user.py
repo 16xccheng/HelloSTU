@@ -13,12 +13,12 @@ from forms import UsrRegisterForm, UsrLoginForm
 
 sys.path.append(config.METHODS_PATH)
 
-users = Blueprint('user', __name__)
+user = Blueprint('API_user', __name__)
 
 
 # 8.我的
 # 用户注册
-@users.route('/HelloSTU/usr_register/', methods=['GET', 'POST'])
+@user.route('/HelloSTU/usr_register/', methods=['GET', 'POST'])
 def usr_register():
     form = UsrRegisterForm()
     if request.method == 'POST':
@@ -46,7 +46,7 @@ def usr_register():
 # 用户登录
 # {"id": 12, "name": "cxc", "account": "16xccheng3", "permission": "user",
 #  "token": "MTU1MDQxNTY3MC4zMDQ3NTQzOmQzOGQ5MGQ1YmZhMmVjNWVlMjdiYjRiMzkyMjA3MjUzMTdkYTViMWE="}
-@users.route('/HelloSTU/usr_login/', methods=['GET', 'POST'])
+@user.route('/HelloSTU/usr_login/', methods=['GET', 'POST'])
 def usr_login():
     form = UsrLoginForm()
     if request.method == 'POST':

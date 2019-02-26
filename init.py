@@ -1,4 +1,4 @@
-#!/usr/bin/env python 
+#!/usr/bin/env python
 # -*- coding:utf-8 -*-
 import os
 import config
@@ -7,7 +7,6 @@ from flask_script import Manager  # 文件拓展
 from flask_bootstrap import Bootstrap  # 文件拓展
 from flask_sqlalchemy import SQLAlchemy
 from flask_uploads import UploadSet, IMAGES, configure_uploads
-
 from flask_cache import Cache
 
 
@@ -17,7 +16,13 @@ bootstrap = Bootstrap(app)
 
 
 # 配置缓存
-cache = Cache(app, config=config.CACHE)
+cache = Cache(app, config={
+    "CACHE_TYPE": "redis",  # 类型
+    "CACHE_REDIS_HOST": "127.0.0.1",  # 主机
+    "CACHE_REDIS_PORT": 6379,  # 端口
+    "CACHE_REDIS_PASSWORD": "ljgljgljg",  # 密码
+    "CACHE_REDIS_DB": 15  # 数据库
+})
 
 # 设置数据库
 app.config['SQLALCHEMY_DATABASE_URI'] = config.SQLALCHEMY_DATABASE_URI
@@ -41,14 +46,13 @@ configure_uploads(app, images)
 app.secret_key = config.SECRET_KEY
 
 # 蓝图
-from user import users
-app.register_blueprint(users, url_prefix='')
-from organization import organizations
-app.register_blueprint(organizations, url_prefix='')
-from communicate import communicates
-app.register_blueprint(communicates, url_prefix='')
-from goods import goodses
-app.register_blueprint(goodses, url_prefix='')
-from content import contents
-app.register_blueprint(contents, url_prefix='')
-
+from API_communicate import communicate
+app.register_blueprint(communicate, url_prefix='')
+from API_content import content
+app.register_blueprint(content, url_prefix='')
+from API_goods import goods
+app.register_blueprint(goods, url_prefix='')
+from API_organization import organization
+app.register_blueprint(organization, url_prefix='')
+from API_user import user
+app.register_blueprint(user, url_prefix='')

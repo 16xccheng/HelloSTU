@@ -14,7 +14,7 @@ from methods import local_time, add_element1, add_element2, upload_image, certif
 
 sys.path.append(config.METHODS_PATH)
 
-communicates = Blueprint('communicate', __name__)
+communicate = Blueprint('API_communicate', __name__)
 
 
 # 6.社交圈子
@@ -25,7 +25,7 @@ communicates = Blueprint('communicate', __name__)
 #        "commentNum": 1, "state": 1, "writer_id": 2, "writer_name": "网球社主席"},
 #  "2": {"id": 3, "createTime": "2019-02-10 17:03:36", "content": "我说3", "image": "None", "agreeNum": 3,
 #        "commentNum": 1, "state": 1, "writer_id": 3, "writer_name": "青协主席"}}
-@communicates.route('/HelloSTU/usr_message/page=<page>&pagesize=<pagesize>')
+@communicate.route('/HelloSTU/usr_message/page=<page>&pagesize=<pagesize>')
 @cache.cached(timeout=300, key_prefix='usr_message')
 def usr_message(page, pagesize):
     state1 = UsrMessage.query.filter_by(state=1).all()
@@ -45,7 +45,7 @@ def usr_message(page, pagesize):
     return json.dumps(add_element1(temp, title), ensure_ascii=False)
 
 
-@communicates.route('/HelloSTU/add_usr_message/', methods=['GET', 'POST'])
+@communicate.route('/HelloSTU/add_usr_message/', methods=['GET', 'POST'])
 def add_usr_message():
     form = UsrMessageForm()
     if request.method == 'POST':
@@ -79,7 +79,7 @@ def add_usr_message():
 # 用户发布信息评论--输入：信息对应id--返回：json列表
 # {"0": {"id": 1, "createTime": "2019-02-10 17:03:36", "content": "我说1说得对", "state": 1, "writer_id": 4,
 #        "replied_id": -1, "message_id": 1, "writer_name": "宋兵甲", "replied_name": "null"}}
-@communicates.route('/HelloSTU/usr_message_comment/id=<t_id>')
+@communicate.route('/HelloSTU/usr_message_comment/id=<t_id>')
 @cache.cached(timeout=300, key_prefix='usr_message_comment')
 def usr_message_comment(t_id):
     temp = UsrMessageComment.query.filter_by(message_id=t_id, state=1).all()
@@ -88,7 +88,7 @@ def usr_message_comment(t_id):
     return json.dumps(add_element2(temp, title), ensure_ascii=False)
 
 
-@communicates.route('/HelloSTU/add_usr_message_comment/', methods=['GET', 'POST'])
+@communicate.route('/HelloSTU/add_usr_message_comment/', methods=['GET', 'POST'])
 def add_usr_message_comment():
     form = UsrMessageCommentForm()
     if request.method == 'POST':

@@ -14,7 +14,7 @@ from models import GoodsC, Goods, GoodsComment
 
 sys.path.append(config.METHODS_PATH)
 
-goodses = Blueprint('goods', __name__)
+goods = Blueprint('API_goods', __name__)
 
 
 # 7.二手交易
@@ -23,7 +23,7 @@ goodses = Blueprint('goods', __name__)
 #   "1": {"id": 2, "name": "学习用品"},
 #   "2": {"id": 3, "name": "饮食用品"},
 #   "3": {"id": 4, "name": "娱乐用品"}}'
-@goodses.route('/HelloSTU/goods_class/')
+@goods.route('/HelloSTU/goods_class/')
 @cache.cached(timeout=300, key_prefix='goods_class')
 def goods_class():
     temp = GoodsC.query.all()
@@ -37,7 +37,7 @@ def goods_class():
 #   "1": {"id": 2, "name": "高数", "createTime": "2018-1-31 13:31:13", "image": null},
 #   "2": {"id": 3, "name": "筷子", "createTime": "2018-1-31 13:31:13", "image": null},
 #   "3": {"id": 4, "name": "手柄", "createTime": "2018-1-31 13:31:13", "image": null}}'
-@goodses.route('/HelloSTU/goods_list/page=<page>&pagesize=<pagesize>')
+@goods.route('/HelloSTU/goods_list/page=<page>&pagesize=<pagesize>')
 @cache.cached(timeout=300, key_prefix='goods_list')
 def goods_list(page, pagesize):
     state1 = Goods.query.filter_by(state=1).all()
@@ -69,16 +69,16 @@ def goods_list(page, pagesize):
 # '{"id": 1, "name": "音响", "createTime": "2018-1-31 13:31:13", "state": 1, "price": 999, "content": "音响",
 #   "image": "None", "phone": "10086", "wechat": "None", "email": "None", "commentNum": 1, "writer_id": 1,
 #   "type": "生活用品"}'
-@goodses.route('/HelloSTU/goods/id=<t_id>')
+@goods.route('/HelloSTU/goods/id=<t_id>')
 @cache.cached(timeout=300, key_prefix='goods')
-def goods(t_id):
+def _goods(t_id):
     temp = Goods.query.filter_by(id=t_id).first()
 
     return json.dumps(eval(str(temp)), ensure_ascii=False)
 
 
 # 上传新商品
-@goodses.route('/HelloSTU/add_goods/', methods=['GET', 'POST'])
+@goods.route('/HelloSTU/add_goods/', methods=['GET', 'POST'])
 def add_goods():
     form = GoodsForm()
     if request.method == 'POST':
@@ -122,7 +122,7 @@ def add_goods():
 # 物品评论--输入：物品id--返回：json列表
 # {"0": {"id": 1, "state": 1, "createTime": "2019-02-10 17:03:36", "content": "我觉得这是1手的", "writer_id": 2,
 #  "replied_id": -1, "goods_id": 1, "writer_name": "网球社主席", "replied_name": "null"}}
-@goodses.route('/HelloSTU/goods_comment/id=<t_id>')
+@goods.route('/HelloSTU/goods_comment/id=<t_id>')
 @cache.cached(timeout=300, key_prefix='goods_comment')
 def goods_comment(t_id):
     temp = GoodsComment.query.filter_by(goods_id=t_id, state=1).all()
@@ -131,7 +131,7 @@ def goods_comment(t_id):
     return json.dumps(add_element2(temp, title), ensure_ascii=False)
 
 
-@goodses.route('/HelloSTU/add_goods_comment/', methods=['GET', 'POST'])
+@goods.route('/HelloSTU/add_goods_comment/', methods=['GET', 'POST'])
 def add_goods_comment():
     form = GoodsCommentForm()
     if request.method == 'POST':
