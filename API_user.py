@@ -76,10 +76,10 @@ def Login():
 def Wxlogin():
     form = WxLoginForm()
     if request.method == 'POST':
-        code = form.code.data
-        url = 'https://api.weixin.qq.com/sns/jscode2session'
-        body = {'appid': config.APPID, 'secret': config.APPSECRET, 'js_code': code, 'grant_type': config.GRANT_TYPE}
-        response = requests.post(url, data=json.dumps(body))
+        js_code = form.code.data
+        url = 'https://api.weixin.qq.com/sns/jscode2session?appid={APPID}&secret={SECRET}&js_code={JSCODE}&grant_type=authorization_code'.format(
+            APPID=config.APPID, SECRET=config.SECRET_KEY, JSCODE=js_code)
+        response = requests.get(url)
         if ('openid', 'session_key', 'expires_in' in response.text)[-1]:
             try:
                 dict = eval(response.text)
