@@ -118,6 +118,7 @@ def Wxupdate():
                 userinfo.image = image
                 userinfo.email = email
                 db.session.commit()
+                return '更新成功'
             except Exception as e:
                 print(e)
                 return '更新失败'

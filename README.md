@@ -10,6 +10,70 @@ http://主机地址/HelloSTU
 
 ## API（注：静态为与用户无关，动态为与用户有关）
 
+### 小程序用户登录
+
+#### 请求URL
+
+前缀+/user/wx/login/
+
+#### 请求方式
+
+POST
+
+#### 请求参数
+
+code
+
+#### 返回例子
+
+```
+{
+    id:1,
+    rdSession:******
+}
+```
+
+#### 返回参数说明
+
+| 参数名    | 类型   | 说明                 |
+| --------- | ------ | -------------------- |
+| id        | int    | 用户在数据库表中的id |
+| rdSession | string | 用户登录凭证         |
+
+#### 备注
+
+id和rdSession需要储存在客户端，之后用户关联操作使用
+
+
+
+### 小程序更新用户信息
+
+#### 请求URL
+
+前缀+/user/wx/update/
+
+#### 请求方式
+
+POST
+
+#### 请求参数
+
+| 参数名    | 必要性 | 类型   | 说明               |
+| --------- | ------ | ------ | ------------------ |
+| id        | 是     | int    | 用户所在数据库表id |
+| rdSession | 是     | string | 用户登录凭证       |
+| name      | 是     | string | 用户昵称           |
+| image     | 是     | string | 用户头像           |
+| email     | 是     | string | 用户邮箱           |
+
+#### 返回例子
+
+更新成功
+
+#### 备注
+
+id和rdSession需要在客户端获取
+
 ## 一.景点
 
 ### 1.景点（静态）
@@ -356,7 +420,7 @@ POST
 | 参数名     | 必要性 | 类型   | 说明         |
 | ---------- | ------ | ------ | ------------ |
 | writer_id  | 是     | int    | 作者id       |
-| token      | 是     | string | 验证签名     |
+| rdSession  | 是     | string | 验证签名     |
 | title      | 否     | string | 信息名称     |
 | activeTime | 否     | string | 信息活动时间 |
 | content    | 是     | string | 信息内容     |
@@ -374,7 +438,7 @@ POST
 
 #### 备注
 
-token保存在客户端
+rdSession保存在客户端
 
 
 
@@ -445,7 +509,7 @@ POST
 | 参数名     | 必要性 | 类型   | 说明       |
 | ---------- | ------ | ------ | ---------- |
 | writer_id  | 是     | int    | 作者id     |
-| token      | 是     | string | 验证签名   |
+| rdSession  | 是     | string | 验证签名   |
 | content    | 是     | string | 评论内容   |
 | replied_id | 是     | int    | 被回复者id |
 | message_id | 是     | int    | 回复信息id |
@@ -461,7 +525,7 @@ POST
 
 #### 备注
 
-token保存在客户端，无被回复者则传输replied_id为-1
+rdSession保存在客户端，无被回复者则传输replied_id为-1
 
 
 
@@ -744,7 +808,7 @@ POST
 | 参数名    | 必要性 | 类型   | 说明        |
 | --------- | ------ | ------ | ----------- |
 | writer_id | 是     | int    | 作者id      |
-| token     | 是     | string | 验证签名    |
+| rdSession | 是     | string | 验证签名    |
 | content   | 是     | string | 信息内容    |
 | images    | 否     | string | 信息图片url |
 
@@ -759,7 +823,7 @@ POST
 
 #### 备注
 
-token保存在客户端
+rdSession保存在客户端
 
 
 
@@ -826,7 +890,7 @@ POST
 | 参数名     | 必要性 | 类型   | 说明       |
 | ---------- | ------ | ------ | ---------- |
 | writer_id  | 是     | int    | 作者id     |
-| token      | 是     | string | 验证签名   |
+| rdSession  | 是     | string | 验证签名   |
 | content    | 是     | string | 信息内容   |
 | replied_id | 是     | int    | 被回复者id |
 | message_id | 是     | int    | 回复信息id |
@@ -842,7 +906,7 @@ POST
 
 #### 备注
 
-token保存在客户端，无被回复者则传输replied_id为-1
+rdSession保存在客户端，无被回复者则传输replied_id为-1
 
 
 
@@ -1005,7 +1069,7 @@ POST
 | 参数名    | 必要性 | 类型   | 说明        |
 | --------- | ------ | ------ | ----------- |
 | writer_id | 是     | int    | 发布者id    |
-| token     | 是     | string | 验证签名    |
+| rdSession | 是     | string | 验证签名    |
 | name      | 是     | string | 商品名称    |
 | price     | 是     | int    | 商品价格    |
 | content   | 是     | string | 商品简介    |
@@ -1026,7 +1090,7 @@ POST
 
 #### 备注
 
-token保存在客户端
+rdSession保存在客户端
 
 
 
@@ -1093,7 +1157,7 @@ POST
 | 参数名     | 必要性 | 类型   | 说明       |
 | ---------- | ------ | ------ | ---------- |
 | writer_id  | 是     | int    | 作者id     |
-| token      | 是     | string | 验证签名   |
+| rdSession  | 是     | string | 验证签名   |
 | content    | 是     | string | 信息内容   |
 | replied_id | 是     | int    | 被回复者id |
 | goods_id   | 是     | int    | 回复信息id |
@@ -1109,13 +1173,13 @@ POST
 
 #### 备注
 
-token保存在客户端，无被回复者则传输replied_id为-1
+rdSession保存在客户端，无被回复者则传输replied_id为-1
 
 
 
 ## 八.我的
 
-### 8.1用户注册（动态）
+### 8.1自定义用户注册（动态）
 
 #### 请求URL
 
@@ -1147,7 +1211,7 @@ POST
 
 
 
-### 8.2用户登录（动态）
+### 8.2自定义用户登录（动态）
 
 #### 请求URL
 

@@ -102,9 +102,9 @@ def certify_token(key, token):
 # 小程序：生成rdSession,密钥：openid+session_key(盐)
 def generate_rdSession(key, salt, expire):
     t_str = str(time.time() + expire)
-    t_hash = hmac.new(str(key).encode("utf-8"), salt, 'sha1').hexdigest()
+    t_hash = hmac.new(str(key).encode("utf-8"), salt.encode("utf-8"), 'sha1').hexdigest()
     rdSession = t_str+':'+t_hash
-    b64_rdSession = base64.urlsafe_b64decode(rdSession.encode("utf-8"))
+    b64_rdSession = base64.urlsafe_b64encode(rdSession.encode("utf-8"))
     return b64_rdSession.decode("utf-8")
 
 
@@ -116,7 +116,7 @@ def certify_rdSession(key, salt, rdSession):
         return False
     if float(rdSession_list[0]) < time.time():
         return False
-    sha1 = hmac.new(str(key).encode("utf-8"), salt, 'sha1')
+    sha1 = hmac.new(str(key).encode("utf-8"), salt.encode("utf-8"), 'sha1')
     if sha1.hexdigest() != rdSession_list[1]:
         return False
     return True
