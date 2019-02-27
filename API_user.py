@@ -3,13 +3,15 @@
 import sys
 import json
 import config
+import requests
+
 from flask import Blueprint
 from flask import request, flash, render_template
 
 from init import db
-from models import UsrInfo
-from methods import generate_token
-from forms import UsrRegisterForm, UsrLoginForm
+from models import UsrInfo, WxUser
+from methods import generate_token, generate_rdSession, certify_rdSession
+from forms import UsrRegisterForm, UsrLoginForm, WxLoginForm, WxUpdateForm
 
 sys.path.append(config.METHODS_PATH)
 
@@ -66,4 +68,59 @@ def Login():
         else:
             return '密码错误'
 
+    return render_template('upload.html', form=form)
+
+
+# 小程序用户登录
+@user.route('/wx/login/', methods=['GET', 'POST'])
+def Wxlogin():
+    form = WxLoginForm()
+    if request.method == 'POST':
+        code = form.code.data
+        url = 'https://api.weixin.qq.com/sns/jscode2session'
+        body = {'appid': config.APPID, 'secret': config.APPSECRET, 'js_code': code, 'grant_type': config.GRANT_TYPE}
+        response = requests.post(url, data=json.dumps(body))
+        if ('openid', 'session_key', 'expires_in' in response.text)[-1]:
+            try:
+                dict = eval(response.text)
+                new_usr = WxUser(openid=dict['openid'], session_key=dict['session_key'])
+                db.session.add(new_usr)
+                db.session.commit()
+                rdSession = generate_rdSession(dict['openid'], dict['session_key'], dict['expires_in'])
+                temp = WxUser.query.filter_by(session_key=dict['session_key']).first
+                message = {}
+                message['id'] = temp.id
+                message['rdSession'] = rdSession
+                return json.dumps(message)
+            except Exception as e:
+                print(e)
+                return '登录失败'
+        else:
+            return '登录失败'
+    return render_template('upload.html', form=form)
+
+
+# 小程序用户信息更新
+@user.route('/wx/update/', methods=['GET', 'POST'])
+def Wxupdate():
+    form = WxUpdateForm()
+    if request.method == 'POST':
+        id = form.id.data
+        temp = WxUser.query.filter_by(id=id).first()
+        rdSession = form.rdSession.data  #
+        if certify_rdSession(temp.openid, temp.session_key, rdSession):
+            name = form.name.data
+            image = form.image.data
+            email = form.email.data
+            try:
+                userinfo = WxUser.query.filter_by(id=id).first()
+                userinfo.name = name
+                userinfo.image = image
+                userinfo.email = email
+                db.session.commit()
+            except Exception as e:
+                print(e)
+                return '更新失败'
+        else:
+            return '登录超时'
     return render_template('upload.html', form=form)

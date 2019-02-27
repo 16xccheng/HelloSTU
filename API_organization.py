@@ -6,11 +6,11 @@ import config
 from flask import Blueprint
 from operator import attrgetter  # 排序操作
 from flask import request, flash, render_template
-from methods import to_dict, local_time, add_element1, add_element2, upload_image, certify_token
 
+from methods import to_dict, local_time, add_element1, add_element2, upload_image, certify_token, certify_rdSession
 from init import cache, db
 from forms import OrganizationMessageCommentForm, OrganizationMessageForm, OrganizationForm
-from models import OrganizationC, OrganizationInfo, OrganizationMessage, OrganizationMessageComment
+from models import OrganizationC, OrganizationInfo, OrganizationMessage, OrganizationMessageComment, WxUser
 
 sys.path.append(config.METHODS_PATH)
 
@@ -120,8 +120,11 @@ def Message_add():
     form = OrganizationMessageForm()
     if request.method == 'POST':
         writer_id = form.writer_id.data
-        token = form.token.data
-        if certify_token(writer_id, token):
+        # token = form.token.data
+        temp = WxUser.query.filter_by(id=writer_id).first()  #
+        rdSession = form.rdSession.data  #
+        # if certify_token(writer_id, token):
+        if certify_rdSession(temp.openid, temp.session_key, rdSession):  #
             title = form.title.data
             activeTime = form.activeTime.data
             content = form.content.data
@@ -167,8 +170,11 @@ def Comment_add():
     form = OrganizationMessageCommentForm()
     if request.method == 'POST':
         writer_id = form.writer_id.data
-        token = form.token.data
-        if certify_token(writer_id, token):
+        # token = form.token.data
+        temp = WxUser.query.filter_by(id=writer_id).first()  #
+        rdSession = form.rdSession.data  #
+        # if certify_token(writer_id, token):
+        if certify_rdSession(temp.openid, temp.session_key, rdSession):  #
             createTime = local_time()
             content = form.content.data
             replied_id = form.replied_id.data

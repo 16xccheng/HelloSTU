@@ -1,5 +1,7 @@
 # 服务器接口文档
 
+github地址：https://github.com/16xccheng/HelloSTU
+
 ## 统一接口前缀：
 
 http://主机地址/HelloSTU

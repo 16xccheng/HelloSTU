@@ -39,7 +39,8 @@ class OrganizationForm(FlaskForm):
 # 组织信息
 class OrganizationMessageForm(FlaskForm):
     writer_id = IntegerField('writer_id', validators=[DataRequired()])
-    token = StringField('token', validators=[DataRequired()])
+    # token = StringField('token', validators=[DataRequired()])
+    rdSession = StringField('rdSession', validators=[DataRequired()])  #
     title = StringField('title', validators=[DataRequired()])
     activeTime = StringField('activeTime', validators=[DataRequired()])
     content = StringField('content', validators=[DataRequired()])
@@ -51,7 +52,8 @@ class OrganizationMessageForm(FlaskForm):
 # 组织信息评论
 class OrganizationMessageCommentForm(FlaskForm):
     writer_id = IntegerField('writer_id', validators=[DataRequired()])
-    token = StringField('token', validators=[DataRequired()])
+    # token = StringField('token', validators=[DataRequired()])
+    rdSession = StringField('rdSession', validators=[DataRequired()])  #
     content = StringField('content', validators=[DataRequired()])
     replied_id = IntegerField('replied_id', validators=[DataRequired()])
     message_id = IntegerField('message_id', validators=[DataRequired()])
@@ -73,7 +75,8 @@ class PlayForm(FlaskForm):
 # 社交信息
 class UsrMessageForm(FlaskForm):
     writer_id = IntegerField('writer_id', validators=[DataRequired()])
-    token = StringField('token', validators=[DataRequired()])
+    # token = StringField('token', validators=[DataRequired()])
+    rdSession = StringField('rdSession', validators=[DataRequired()])  #
     content = StringField('content', validators=[DataRequired()])
     images = FileField('images', validators=[FileRequired(message='choose an image'), FileAllowed(images)])
     submit = SubmitField('submit')
@@ -82,7 +85,8 @@ class UsrMessageForm(FlaskForm):
 # 社交信息评论
 class UsrMessageCommentForm(FlaskForm):
     writer_id = IntegerField('writer_id', validators=[DataRequired()])
-    token = StringField('token', validators=[DataRequired()])
+    # token = StringField('token', validators=[DataRequired()])
+    rdSession = StringField('rdSession', validators=[DataRequired()])  #
     content = StringField('content', validators=[DataRequired()])
     replied_id = IntegerField('replied_id', validators=[DataRequired()])
     message_id = IntegerField('message_id', validators=[DataRequired()])
@@ -92,7 +96,8 @@ class UsrMessageCommentForm(FlaskForm):
 # 商品
 class GoodsForm(FlaskForm):
     writer_id = IntegerField('writer_id', validators=[DataRequired()])
-    token = StringField('token', validators=[DataRequired()])
+    # token = StringField('token', validators=[DataRequired()])
+    rdSession = StringField('rdSession', validators=[DataRequired()])  #
     name = StringField('name', validators=[DataRequired()])
     price = IntegerField('price', validators=[DataRequired()])
     content = StringField('content', validators=[DataRequired()])
@@ -107,7 +112,8 @@ class GoodsForm(FlaskForm):
 # 商品评论
 class GoodsCommentForm(FlaskForm):
     writer_id = IntegerField('writer_id', validators=[DataRequired()])
-    token = StringField('token', validators=[DataRequired()])
+    # token = StringField('token', validators=[DataRequired()])
+    rdSession = StringField('rdSession', validators=[DataRequired()]) #
     content = StringField('content', validators=[DataRequired()])
     replied_id = IntegerField('replied_id', validators=[DataRequired()])
     goods_id = IntegerField('goods_id', validators=[DataRequired()])
@@ -126,4 +132,20 @@ class UsrRegisterForm(FlaskForm):
 class UsrLoginForm(FlaskForm):
     account = StringField('account', validators=[DataRequired()])
     password = StringField('password', validators=[DataRequired()])
+    submit = SubmitField('submit')
+
+
+# 小程序用户登录
+class WxLoginForm(FlaskForm):
+    code = StringField('code', validators=[DataRequired()])
+    submit = SubmitField('submit')
+
+
+# 小程序用户信息更新
+class WxUpdateForm(FlaskForm):
+    id = StringField('id', validators=[DataRequired()])
+    rdSession = StringField('rdSession', validators=[DataRequired()])
+    name = StringField('name', validators=[DataRequired()])
+    image = StringField('image', validators=[DataRequired()])
+    email = StringField('email', validators=[DataRequired()])
     submit = SubmitField('submit')

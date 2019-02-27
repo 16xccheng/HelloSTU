@@ -9,6 +9,11 @@ JSON_AS_ASCII = False
 # app密钥
 SECRET_KEY = 'HelloSTU'
 
+APPID = 'wx758b2fedea44c0c0'
+
+APPSECRET = '506d192cc834dc7a70df40957e2891a7'
+
+GRANT_TYPE = 'authorization_code'
 # 图片上传路径
 UPLOADED_IMAGES_DEST = 'static/image'
 

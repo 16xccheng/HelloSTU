@@ -8,9 +8,9 @@ from operator import attrgetter  # 排序操作
 from flask import request, flash, render_template
 
 from init import cache, db
-from models import UsrMessage, UsrMessageComment
+from models import UsrMessage, UsrMessageComment, WxUser
 from forms import UsrMessageForm, UsrMessageCommentForm
-from methods import local_time, add_element1, add_element2, upload_image, certify_token
+from methods import local_time, add_element1, add_element2, upload_image, certify_token, certify_rdSession
 
 sys.path.append(config.METHODS_PATH)
 
@@ -50,8 +50,11 @@ def Message_add():
     form = UsrMessageForm()
     if request.method == 'POST':
         writer_id = form.writer_id.data
-        token = form.token.data
-        if certify_token(writer_id, token):
+        # token = form.token.data
+        temp = WxUser.query.filter_by(id=writer_id).first()  #
+        rdSession = form.rdSession.data  #
+        # if certify_token(writer_id, token):
+        if certify_rdSession(temp.openid, temp.session_key, rdSession):  #
             content = form.content.data
             createTime = local_time()
             image = form.images.data
@@ -93,8 +96,11 @@ def Comment_add():
     form = UsrMessageCommentForm()
     if request.method == 'POST':
         writer_id = form.writer_id.data
-        token = form.token.data
-        if certify_token(writer_id, token):
+        # token = form.token.data
+        temp = WxUser.query.filter_by(id=writer_id).first()  #
+        rdSession = form.rdSession.data  #
+        # if certify_token(writer_id, token):
+        if certify_rdSession(temp.openid, temp.session_key, rdSession):  #
             createTime = local_time()
             content = form.content.data
             replied_id = form.replied_id.data

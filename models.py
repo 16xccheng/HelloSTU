@@ -14,7 +14,9 @@ class Size:
     activeTimeSize = 64  # 活动时间
     attachmentSize = 64  # 附件链接
 
+    session_keySize = 32
     createTimeSize = 32  # 创建时间
+    openidSize = 32
     localSize = 32  # 地址
     emailSize = 32  # 邮件
 
@@ -31,6 +33,21 @@ class Size:
 
 
 # #################################################### 数据库表单 ##################################################### #
+# 小程序：用户信息
+class WxUser(db.Model):
+    __tablename__ = 'wxUsers'
+    id = db.Column(db.Integer, primary_key=True)
+    openid = db.Column(db.String(Size.openidSize), unique=True)
+    session_key = db.Column(db.String(Size.session_keySize))
+    name = db.Column(db.String(Size.nameSize))
+    image = db.Column(db.String(Size.imageSize))
+    email = db.Column(db.String(Size.emailSize))
+
+    def __repr__(self):
+        return "{'id':%d,'openid':'%s','session_key':'%s','name':'%s','image':'%s','email':'%s'}" \
+               % (self.id, self.openid, self.session_key, self.name, self.image, self.email)
+
+
 # 1.景点介绍
 # 景点
 class Scenery(db.Model):
