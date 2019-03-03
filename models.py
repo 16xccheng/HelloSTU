@@ -41,11 +41,15 @@ class WxUser(db.Model):
     session_key = db.Column(db.String(Size.session_keySize))
     name = db.Column(db.String(Size.nameSize))
     image = db.Column(db.String(Size.imageSize))
-    email = db.Column(db.String(Size.emailSize))
+    city = db.Column(db.String(16))
+    country = db.Column(db.String(16))
+    gender = db.Column(db.Integer)
+    language = db.Column(db.String(8))
+    province = db.Column(db.String(16))
 
     def __repr__(self):
-        return "{'id':%d,'openid':'%s','session_key':'%s','name':'%s','image':'%s','email':'%s'}" \
-               % (self.id, self.openid, self.session_key, self.name, self.image, self.email)
+        return "{'id':%d,'openid':'%s','session_key':'%s','name':'%s','image':'%s','city':'%s','country':'%s','gender':%d,'language':'%s','province':'%s'}" \
+               % (self.id, self.openid, self.session_key, self.name, self.image, self.city, self.country, self.gender, self.language, self.province)
 
 
 # 1.景点介绍

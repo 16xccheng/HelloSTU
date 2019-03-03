@@ -1,4 +1,4 @@
-#!/usr/bin/env python 
+#!/usr/bin/env python
 # -*- coding:utf-8 -*-
 import sys
 import json
@@ -72,32 +72,33 @@ def Login():
 
 
 # 小程序用户登录
-@user.route('/wx/login/', methods=['GET', 'POST'])
+@user.route('/wx/login/', methods=['POST'])
 def Wxlogin():
-    form = WxLoginForm()
     if request.method == 'POST':
-        js_code = form.code.data
+        js_code = request.json['code']  # 坑，要清楚前端发送的类型
         url = 'https://api.weixin.qq.com/sns/jscode2session?appid={APPID}&secret={SECRET}&js_code={JSCODE}&grant_type=authorization_code'.format(
-            APPID=config.APPID, SECRET=config.SECRET_KEY, JSCODE=js_code)
+            APPID=config.APPID, SECRET=config.APPSECRET, JSCODE=js_code)
         response = requests.get(url)
-        if ('openid', 'session_key', 'expires_in' in response.text)[-1]:
+        print('这里这里这里'+response.text)
+        if ('openid', 'session_key' in response.text)[-1]:
             try:
                 dict = eval(response.text)
-                new_usr = WxUser(openid=dict['openid'], session_key=dict['session_key'])
+                new_usr = WxUser(openid=dict['openid'], session_key=dict['session_key'], gender=0)
                 db.session.add(new_usr)
                 db.session.commit()
-                rdSession = generate_rdSession(dict['openid'], dict['session_key'], dict['expires_in'])
-                temp = WxUser.query.filter_by(session_key=dict['session_key']).first
+                rdSession = generate_rdSession(dict['openid'], dict['session_key'])
+                temp = WxUser.query.filter_by(session_key=dict['session_key']).first()
                 message = {}
                 message['id'] = temp.id
                 message['rdSession'] = rdSession
                 return json.dumps(message)
             except Exception as e:
                 print(e)
-                return '登录失败'
+                return '登录失败1'
         else:
-            return '登录失败'
-    return render_template('upload.html', form=form)
+            return '登录失败2'
+    else:
+        return '失败'
 
 
 # 小程序用户信息更新
@@ -111,12 +112,20 @@ def Wxupdate():
         if certify_rdSession(temp.openid, temp.session_key, rdSession):
             name = form.name.data
             image = form.image.data
-            email = form.email.data
+            city = form.city.data
+            country = form.country.data
+            gender = form.gender.data
+            language = form.language.data
+            province = form.province.data
             try:
                 userinfo = WxUser.query.filter_by(id=id).first()
                 userinfo.name = name
                 userinfo.image = image
-                userinfo.email = email
+                userinfo.city = city
+                userinfo.country = country
+                userinfo.gender = gender
+                userinfo.language = language
+                userinfo.province = province
                 db.session.commit()
                 return '更新成功'
             except Exception as e:

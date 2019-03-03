@@ -100,7 +100,7 @@ def certify_token(key, token):
 
 
 # 小程序：生成rdSession,密钥：openid+session_key(盐)
-def generate_rdSession(key, salt, expire):
+def generate_rdSession(key, salt, expire=2592000):
     t_str = str(time.time() + expire)
     t_hash = hmac.new(str(key).encode("utf-8"), salt.encode("utf-8"), 'sha1').hexdigest()
     rdSession = t_str+':'+t_hash

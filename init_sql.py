@@ -7,7 +7,16 @@
 
 
 # -*- coding:utf-8 -*-
-from app import *
+import time
+from init import db
+from models import UsrInfo, Scenery, PlaceC, Place, PlayC, Play
+from models import OrganizationC, OrganizationInfo, OrganizationMessage, OrganizationMessageComment, Message
+from models import UsrMessage, UsrMessageComment, GoodsC, Goods, GoodsComment, QuestionC, Question, UseC, Use
+
+# 获取当前时间--返回（字符串）：2019-02-04 11:47:35
+def local_time():
+    return time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
+
 
 if __name__ == '__main__':
     db.drop_all()
